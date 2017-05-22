@@ -1,7 +1,11 @@
+import inspect
+
 def our_decorator(func):
     def function_wrapper(*args, **keys):
         print(args)
         print(keys)
+        f = inspect.currentframe()
+        print(f.f_code.co_name)
         return func(*args, **keys)
     print("decorator was called on function %s"%func.__name__)
     function_wrapper.__name__ = func.__name__
@@ -31,6 +35,8 @@ def main():
     print("succ(1) = %s"%succ(1))
     print("add(1,2) = %s" % add(1,2))
     print("ss([1,2,3]) = %s" % ss([1,2,3]))
+    print("succ(2) = %s" % succ(2))
 
 
-if __name__ == "__main__": main()
+if __name__ == "__main__":
+    main()

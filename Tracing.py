@@ -12,49 +12,49 @@ def print_var(v):
         if '__dic__' in dir(p):
             print_var(vars(v)[p])
         else:
-            log("%s= %s" % (p, vars(v)[p]))
+            print("%s= %s" % (p, vars(v)[p]))
 
 #TODO: add the caller name
 def trace_func(frame,event,arg):
-    log('event = %s'%event)
+    print('event = %s'%event)
     if event == 'exception':
-        log('arg = %s, %s, %s' % arg)
+        print('arg = %s, %s, %s' % arg)
     else:
-        log('arg = %s' % arg)
-        log('file name = %s'%frame.f_code.co_filename)
-    log('name = %s'%frame.f_code.co_name)
-    log('line no = %s'%frame.f_lineno)
-    log('_____________')
+        print('arg = %s' % arg)
+        print('file name = %s'%frame.f_code.co_filename)
+    print('name = %s'%frame.f_code.co_name)
+    print('line no = %s'%frame.f_lineno)
+    print('_____________')
     return trace_func
 
 def trace_specific_func(frame,event,arg):
     if event == 'call':
-        log('**********')
+        print('**********')
         """info = inspect.getframeinfo(frame = frame)
-        log(info)
-        log(inspect.trace())"""
+        print(info)
+        print(inspect.trace())"""
         stack = inspect.stack()
         for f in stack:
-            log(f)
-        log('_____________')
+            print(f)
+        print('_____________')
         if frame.f_code.co_name == '__init__':
             def trace_init(frame, event, arg):
-                log("I'm tracing __init__")
+                print("I'm tracing __init__")
                 trace_func(frame, event, arg)
             return trace_init
         elif frame.f_code.co_name == 'f':
             def trace_f(frame, event, arg):
-                log("I'm tracing f")
+                print("I'm tracing f")
                 trace_func(frame, event, arg)
             return trace_f
         elif frame.f_code.co_name == 'g':
             def trace_g(frame, event, arg):
-                log("I'm tracing g")
+                print("I'm tracing g")
                 trace_func(frame, event, arg)
             return trace_g
         elif frame.f_code.co_name == 'main':
             def trace_main(frame, event, arg):
-                log("I'm tracing main")
+                print("I'm tracing main")
                 trace_func(frame, event, arg)
             return trace_main
     else:
@@ -70,16 +70,16 @@ def g(x):
     a[5] = x
     return a
 
-def main():
-    a = A(1)
-    y = f(a)
-    l = g(125)
-    log(y)
-    log(l)
+    def main():
+        a = A(1)
+        y = f(a)
+        l = g(125)
+        print(y)
+        print(l)
 
-def log(s):
-    print(s)
+    def print(s):
+        print(s)
 
-if __name__ == '__main__':
-    sys.settrace(trace_specific_func)
-    main()
+    if __name__ == '__main__':
+        sys.settrace(trace_specific_func)
+        main()
