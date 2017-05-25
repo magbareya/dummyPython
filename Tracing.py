@@ -15,7 +15,7 @@ def print_var(v):
             print("%s= %s" % (p, vars(v)[p]))
 
 #TODO: add the caller name
-def trace_func(frame,event,arg):
+def trace_func(frame, event, arg):
     print('event = %s'%event)
     if event == 'exception':
         print('arg = %s, %s, %s' % arg)
@@ -27,7 +27,7 @@ def trace_func(frame,event,arg):
     print('_____________')
     return trace_func
 
-def trace_specific_func(frame,event,arg):
+def trace_specific_func(frame, event, arg):
     if event == 'call':
         print('**********')
         """info = inspect.getframeinfo(frame = frame)
