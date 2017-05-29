@@ -70,12 +70,12 @@ def g(x):
     a[5] = x
     return a
 
-    def main():
-        a = A(1)
-        y = f(a)
-        l = g(125)
-        print(y)
-        print(l)
+def main():
+    a = A(1)
+    y = f(a)
+    l = g(125)
+    print(y)
+    print(l)
 
     def print(s):
         print(s)

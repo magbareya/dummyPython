@@ -1,2 +1,8 @@
 # Pycharm IDE file
 .idea/
+
+# cache
+__pycache__/
+
+# coverage
+.coverage
