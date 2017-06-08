@@ -14,7 +14,7 @@ def print_var(v):
         else:
             print("%s= %s" % (p, vars(v)[p]))
 
-#TODO: add the caller name
+
 def trace_func(frame, event, arg):
     print('event = %s'%event)
     if event == 'exception':
