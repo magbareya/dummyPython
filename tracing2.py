@@ -15,21 +15,25 @@ def func2(s):
 
 def my_tracer(frame, event, arg):
     def line_tracer(frame, event, arg):
-        print('line tracer: ', frame.f_code.co_filename, frame.f_lineno, frame.f_code.co_name, arg)
+        print('line tracer: ', frame.f_code.co_filename, frame.f_lineno, frame.f_code.co_name,
+              arg)
         return line_tracer
-
-    if frame.f_code.co_name == 'func1':
-        print('frame tracer, returning None: ', frame.f_code.co_filename, frame.f_lineno, frame.f_code.co_name, arg)
-        return None
-    else:
-        print('frame tracer, returning line_tracer: ', frame.f_code.co_filename, frame.f_lineno, frame.f_code.co_name, arg)
-        return line_tracer
+    info = inspect.getframeinfo(frame=frame)
+    print(info)
+    print()
+    for f in inspect.stack():
+        print(f)
+    print('-' * 20)
+    print()
+    print (info == inspect.stack()[1])
+    return line_tracer
 
 
 def main():
-    sys.settrace(my_tracer)
-    func1('Mahmoud')
+    func1('a')
+    pass
 
 
 if __name__ == '__main__':
+    sys.settrace(my_tracer)
     main()
