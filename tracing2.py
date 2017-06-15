@@ -16,20 +16,25 @@ def func2(s):
 def my_tracer(frame, event, arg):
     def line_tracer(frame, event, arg):
         print('line tracer: ', frame.f_code.co_filename, frame.f_lineno, frame.f_code.co_name,
-              arg)
+              arg, frame.f_back)
+        info = inspect.getframeinfo(frame)
+        m = inspect.getmodule(frame.f_code.co_filename)
+        print('module = ', m)
         return line_tracer
-    info = inspect.getframeinfo(frame=frame)
-    print(info)
-    print()
-    for f in inspect.stack():
+    print("my tracer")
+    stack = inspect.stack()
+    for f in stack:
         print(f)
     print('-' * 20)
     print()
-    print (info == inspect.stack()[1])
     return line_tracer
 
 
 def main():
+    s = {1,2}
+    s.add(1)
+    s.add(1)
+    print(s)
     func1('a')
     pass
 
