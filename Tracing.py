@@ -1,6 +1,7 @@
 import inspect
 import sys
 
+
 class A:
 
     def __init__(self, v):
@@ -24,8 +25,10 @@ def trace_func(frame, event, arg):
         print('file name = %s'%frame.f_code.co_filename)
     print('name = %s'%frame.f_code.co_name)
     print('line no = %s'%frame.f_lineno)
+    print('')
     print('_____________')
     return trace_func
+
 
 def trace_specific_func(frame, event, arg):
     if event == 'call':
@@ -60,15 +63,18 @@ def trace_specific_func(frame, event, arg):
     else:
         return trace_func
 
+
 def f(a):
     x = 5 + 7
     y = x**2
     return y
 
+
 def g(x):
     a = [i**2 for i in range(10)]
     a[5] = x
     return a
+
 
 def main():
     a = A(1)
@@ -77,9 +83,7 @@ def main():
     print(y)
     print(l)
 
-    def print(s):
-        print(s)
 
-    if __name__ == '__main__':
-        sys.settrace(trace_specific_func)
-        main()
+if __name__ == '__main__':
+    sys.settrace(trace_specific_func)
+    main()

@@ -1,6 +1,7 @@
 import sys
+import os
 import logging
-
+import inspect
 
 class Foo:
     def foo(self):
@@ -44,13 +45,21 @@ def fullname(o):
     return o.__module__ + "." + o.__class__.__module__ + "." + o.__name__
 
 
+def foo():
+    frame = inspect.stack()[1]
+    print(frame.lineno)
+    print(frame)
+
+def goo():
+    foo()
+
+def format_msg():
+    return '{a}, {b}'.format(a='1', b='2')
+
+
 def main():
-    a = A()
-    f = a.return_func()
-    f()
-    a.member = "B"
-    f()
-    pass
+    m = '{a}, {b}'.format(a='1', b='2')
+    print(format_msg())
 
 if __name__ == '__main__':
     main()
